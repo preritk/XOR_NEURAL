@@ -75,7 +75,7 @@ def Neural(X,Theta_1,Theta_2,Y):
             Theta_2 = Theta_2 - (learning_rate/4) * np.matmul(delta_3,np.transpose(a2))
             J = costfunction(X,Y,h,Theta_1,Theta_2)
 
-    return temp,J,Theta_1,Theta_2
+    return Theta_1,Theta_2
 
 def main():
     X = []
@@ -87,10 +87,7 @@ def main():
             X.append([int(dataset[i][0]),int(dataset[i][1])])
             Y.append(int(dataset[i][2]))
     Theta_1,Theta_2 = Randomise()
-    temp,J,Theta_1,Theta_2 = Neural(X,Theta_1,Theta_2,Y)
-    print(J)
-    print(temp)
-    data = [[1,0,0],[1,0,1],[1,1,0],[1,1,1]]
-    pred = sigmoid(np.matmul(data,np.transpose(Theta_2)))
-    print(pred)
+    Theta_1,Theta_2 = Neural(X,Theta_1,Theta_2,Y)
+    print(Theta_1)
+    print(Theta_2)
 main()
