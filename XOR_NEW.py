@@ -53,7 +53,7 @@ def costfunction_NN(X,Y,Theta_1,Theta_2):
     H = []
     for i in range(len(X)):
         h,z3,a2,a1 = ForwardProp(X[i],Theta_1,Theta_2) #z3,a2,a1 are useless here.They are included to maintain the pattern
-        H = H + h
+        H = H + h      #Forming output matrix
     Y = [[Y[0]],[Y[1]],[Y[2]],[Y[3]]]
     J = 0.0
     J = (-1.0/4)*(np.matmul(np.transpose(Y),np.log(H)) + np.matmul(np.transpose(np.ones((4,1),dtype = float)-Y),np.log(np.ones((4,1),dtype = float)-H)))
