@@ -1,5 +1,3 @@
-#This model returns the XOR value of 2 binary digits . The model uses the concept of Neural Networks.
-#XOR.csv contains the data in which there are 4 training examples i.e. all the 4 possible combinations of 2 binary digits.
 import csv
 import numpy as np
 import random
@@ -103,4 +101,15 @@ def main():
         lines = csv.reader(csvfile)
         dataset = list(lines)
         for i in range(len(dataset)):
-            X.append([int(dataset[i][0]),
+            X.append([int(dataset[i][0]),int(dataset[i][1])])      #Feature matrix formation
+            Y.append(int(dataset[i][2]))                           #Output matrix formation
+    displayData(X,Y)                                               #Displaying the data
+    Theta_1,Theta_2 = Randomise()                                  #Randomising Theta_1,Theta_2
+    Theta_1,Theta_2 = Train_NN(X,Y,Theta_1,Theta_2)                 #Training Neural Network
+
+main()         
+                      
+                      
+                      
+                      
+           
