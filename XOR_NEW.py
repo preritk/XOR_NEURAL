@@ -10,7 +10,7 @@ HIDDEN_LAYER = 2   #NO. of nodes in hidden layer
 OUTPUT_LAYER = 1   #NO. of nodes in otput layer
 learning_rate = 0.1 #Learning rate
 lamda = 0.0        #Regularisation not taken in consideration
-epochs = 30     #Number of iterations
+epochs = 300     #Number of iterations
 def displayData(X,Y):             #Displays data
     for i in range(len(X)):
         if(Y[i]==1):           # 1 is marked by o
@@ -79,7 +79,7 @@ def Train_NN(X,Y,Theta_1,Theta_2):
         Theta_1 = Theta_1 - ((learning_rate)*(Theta1_grad))     #Updating Theta_1
         Theta_2 = Theta_2 - ((learning_rate)*(Theta2_grad))     #Updating Theta_2
         cost = costfunction_NN(X,Y,Theta_1,Theta_2)             #Calculating cost
-        plt.scatter(x,cost,marker = 'o',color = 'r',s = 30)
+        plt.scatter(x,cost,marker = 'x',color = 'r')
     plt.xlabel('No. of iterations')
     plt.ylabel('Cost')
     plt.show()
