@@ -10,7 +10,7 @@ HIDDEN_LAYER = 2   #NO. of nodes in hidden layer
 OUTPUT_LAYER = 1   #NO. of nodes in otput layer
 learning_rate = 0.1 #Learning rate
 lamda = 0.0        #Regularisation not taken in consideration
-epochs = 300     #Number of iterations
+epochs = 1500     #Number of iterations
 def displayData(X,Y):             #Displays data
     for i in range(len(X)):
         if(Y[i]==1):           # 1 is marked by o
