@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 from pylab import scatter, show, legend, xlabel, ylabel
 
 INPUT_LAYER = 2    #NO. of nodes in input layer
-HIDDEN_LAYER = 2   #NO. of nodes in hidden layer
+HIDDEN_LAYER = 3   #NO. of nodes in hidden layer
 OUTPUT_LAYER = 1   #NO. of nodes in otput layer
 learning_rate = 1 #Learning rate
 lamda = 0.0        #Regularisation not taken in consideration
-epochs = 3500    #Number of iterations
+epochs = 10000    #Number of iterations
 def displayData(X,Y):             #Displays data
     for i in range(len(X)):
         if(Y[i]==1):           # 1 is marked by o
@@ -43,7 +43,7 @@ def ForwardProp(a1,Theta_1,Theta_2):
     a1 = [[1],[a1[0]],[a1[1]]]             # bias value added to features
     z2 = np.matmul(Theta_1,a1)
     a2 = sigmoid(z2)                       #Activation values for layer 2
-    a2 = [[1],[a2[0]],a2[1]]               #Bias value added to layer 2 actvation values
+    a2 = [[1],[a2[0]],[a2[1]],[a2[2]]]     #Bias value added to layer 2 actvation values
     z3 = np.matmul(Theta_2,a2)
     h = sigmoid(z3)                        #Activation value for layer 3
     h = [h[0]]                             #Just converting to numpy array
@@ -70,7 +70,7 @@ def Train_NN(X,Y,Theta_1,Theta_2):
             delta_3 = h[0] - Y[i]                  #Error in layer 3
             delta_3 = [[delta_3[0]]]                  #Just converting to 1x1 matrix
             delta_2 = np.multiply(np.matmul(np.transpose(Theta_2),delta_3),sigmoidGradient(z3))
-            delta_2 = [delta_2[1],delta_2[2]]     #Error in layer 2
+            delta_2 = [delta_2[1],delta_2[2],delta_2[3]]     #Error in layer 2
 
             #No delta_1 defined because it is feature matrix which is errorless
 
