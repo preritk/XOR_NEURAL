@@ -10,7 +10,7 @@ HIDDEN_LAYER = 3   #NO. of nodes in hidden layer
 OUTPUT_LAYER = 1   #NO. of nodes in otput layer
 learning_rate = 1 #Learning rate
 lamda = 0.0        #Regularisation not taken in consideration
-epochs = 20000    #Number of iterations
+epochs = 128    #Number of iterations
 def displayData(X,Y):             #Displays data
     for i in range(len(X)):
         if(Y[i]==1):           # 1 is marked by o
@@ -55,7 +55,7 @@ def costfunction_NN(X,Y,Theta_1,Theta_2):
         h,z3,a2,a1 = ForwardProp(X[i],Theta_1,Theta_2) #z3,a2,a1 are useless here.They are included to maintain the pattern
         H = H + h
     Y = [[Y[0]],[Y[1]],[Y[2]],[Y[3]]]
-    # J = 0.0
+    J = 0.0
     J = (-1.0/4)*(np.matmul(np.transpose(Y),np.log(H)) + np.matmul(np.transpose(np.ones((4,1),dtype = float)-Y),np.log(np.ones((4,1),dtype = float)-H)))
     return J
 x1 = []
@@ -64,6 +64,7 @@ def Train_NN(X,Y,Theta_1,Theta_2):
     Theta1_grad = np.zeros(np.shape(Theta_1))  # Defining initial gradient matrices for Theta_1 and Theta_2
     Theta2_grad = np.zeros(np.shape(Theta_2))
     for x in range(epochs):
+        #np.random.shuffle(X)
         for i in range(len(X)):
             h,z3,a2,a1 = ForwardProp(X[i],Theta_1,Theta_2)  #Forward Propogation for eacg training example
             """Backward Propogation"""
@@ -81,15 +82,15 @@ def Train_NN(X,Y,Theta_1,Theta_2):
         Theta_2 = Theta_2 + ((learning_rate)*(Theta2_grad))     #Updating Theta_2
         cost = costfunction_NN(X,Y,Theta_1,Theta_2)             #Calculating cost
         # plt.scatter(cost,x,marker = 'x',color = 'r')
-        print('x:', x)
-        print('cost:', cost[0][0])
-        x1.append([x])
+        #print('x:', x)
+        #print('cost:', cost[0][0])
+        #x1.append([x])
         cost1.append(cost[0][0])
-    plt.plot(x1, cost1, '-')
-    plt.xlabel('No. of iterations')
-    plt.ylabel('Cost')
-    plt.show()
-    return Theta_1,Theta_2
+    #plt.plot(x1, cost1, '-')
+    #plt.xlabel('No. of iterations')
+    #plt.ylabel('Cost')
+    #plt.show()
+    return Theta_1,Theta_2,np.min(cost1)
 
 def main():
     X = []
@@ -102,7 +103,12 @@ def main():
             Y.append(int(dataset[i][2]))                           #Output matrix formation
     displayData(X,Y)                                               #Displaying the data
     Theta_1,Theta_2 = Randomise()                                  #Randomising Theta_1,Theta_2
-    Theta_1,Theta_2 = Train_NN(X,Y,Theta_1,Theta_2)                 #Training Neural Network
+    threshold = 0.51
+    current = 10
+    while current>threshold :
+        Theta_1,Theta_2,current = Train_NN(X,Y,Theta_1,Theta_2)     #Training Neural Network
+        print(current)
+
     h1, z3, a2, a1 = ForwardProp(X[0],Theta_1,Theta_2)
     h2, z3, a2, a1 = ForwardProp(X[1], Theta_1, Theta_2)
     h3, z3, a2, a1 = ForwardProp(X[2], Theta_1, Theta_2)
