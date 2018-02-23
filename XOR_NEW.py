@@ -4,7 +4,7 @@ import random
 import math
 import matplotlib.pyplot as plt
 from pylab import scatter, show, legend, xlabel, ylabel
-
+import pandas as pd
 INPUT_LAYER = 2    #NO. of nodes in input layer
 HIDDEN_LAYER = 3   #NO. of nodes in hidden layer
 OUTPUT_LAYER = 1   #NO. of nodes in otput layer
@@ -93,14 +93,8 @@ def Train_NN(X,Y,Theta_1,Theta_2):
     return Theta_1,Theta_2,np.min(cost1)
 
 def main():
-    X = []
-    Y = []
-    with open("XOR.csv","r") as csvfile:      #importing data from csv file
-        lines = csv.reader(csvfile)
-        dataset = list(lines)
-        for i in range(len(dataset)):
-            X.append([int(dataset[i][0]),int(dataset[i][1])])      #Feature matrix formation
-            Y.append(int(dataset[i][2]))                           #Output matrix formation
+    X = pd.read_csv('./XOR.csv',header = None,usecols = [0,1]).values
+    Y = pd.read_csv('./XOR.csv',header = None,usecols = [2]).values.flatten()
     displayData(X,Y)                                               #Displaying the data
     Theta_1,Theta_2 = Randomise()                                  #Randomising Theta_1,Theta_2
     threshold = 0.51
